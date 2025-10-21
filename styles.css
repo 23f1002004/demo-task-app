@@ -1,53 +1,113 @@
+:root {
+    --bg-color-light: #f8f9fa;
+    --text-color-light: #343a40;
+    --card-bg-light: #ffffff;
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+
+    --bg-color-dark: #212529;
+    --text-color-dark: #f8f9fa;
+    --card-bg-dark: #343a40;
+}
+
+/* Base Light Mode Setup */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 40px;
-    background-color: #f8f9fa;
-    color: #343a40;
-    text-align: center;
+    margin: 0;
+    padding: 40px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
     line-height: 1.6;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+header {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+body.dark-mode header {
+    border-bottom: 1px solid #444;
 }
 
 .container {
     max-width: 600px;
-    margin: 40px auto;
+    margin: 0 auto;
     padding: 30px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg-light);
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-h1 {
-    color: #007bff;
-    margin-bottom: 20px;
+body.dark-mode .container {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    background-color: var(--card-bg-dark);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px;
+    transition: background-color 0.2s, opacity 0.2s;
 }
 
 #actionButton {
-    padding: 12px 25px;
-    font-size: 18px;
-    background-color: #28a745;
+    background-color: var(--primary-color);
     color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s, transform 0.1s;
 }
 
 #actionButton:hover {
-    background-color: #218838;
-}
-
-#actionButton:active {
-    transform: scale(0.98);
+    background-color: var(--primary-hover);
 }
 
 #output {
-    margin-top: 30px;
+    margin-top: 20px;
     padding: 15px;
-    border: 2px solid #007bff;
-    background-color: #e9f5ff;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #0056b3;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 50px;
+    text-align: left;
+    transition: border-color 0.3s;
 }
+
+body.dark-mode #output {
+    border: 1px solid #555;
+}
+
+/* Styling specifically for the Dark Mode Toggle Button */
+#darkModeToggle {
+    background-color: transparent;
+    color: var(--text-color-light);
+    border: 1px solid var(--text-color-light);
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+body.dark-mode #darkModeToggle {
+    color: var(--text-color-dark);
+    border: 1px solid var(--text-color-dark);
+}
+
+#darkModeToggle:hover {
+    opacity: 0.8;
+    background-color: transparent; 
+}
+<!-- updated: 2025-10-21T18:31:48.383816 -->
