@@ -1,0 +1,40 @@
+name: Daily Auto-Commit
+
+on:
+  # 1. Schedule to run daily at 07:30 UTC (specific time, no wildcards)
+  schedule:
+    - cron: '30 7 * * *'
+  
+  # 2. Allows you to manually trigger this workflow from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  auto-commit-job:
+    runs-on: ubuntu-latest
+    
+    # Grant permissions for the job to write to the repository
+    permissions:
+      contents: write
+      
+    steps:
+      # Step 1: Checks out your repository's code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Step 2: The required step with your email in its name
+      - name: Daily check for 23f1002004@ds.study.iitm.ac.in
+        run: echo "This step satisfies the email name requirement."
+
+      # Step 3: Modify a file to create something to commit
+      # This command overwrites 'last_run.log' with the current date and time
+      - name: Update log file
+        run: echo "Last workflow run: $(date)" > last_run.log
+
+      # Step 4: Use a pre-built action to commit and push the change
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: Automated daily log update"
+          file_pattern: last_run.log
+          commit_user_name: github-actions[bot]
+          commit_user_email: github-actions[bot]@users.noreply.github.com
